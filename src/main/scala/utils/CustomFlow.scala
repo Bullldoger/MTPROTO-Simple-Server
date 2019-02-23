@@ -9,12 +9,12 @@ import scodec.bits.ByteVector
 
 import CommandsHandler.{_}
 
-class CustomFlow() extends GraphStage[FlowShape[ByteString, ByteVector]] {
+class CustomFlow() extends GraphStage[FlowShape[ByteString, MTProtoRequest]] {
 
   val in = Inlet[ByteString]("ByteString.in")
-  val out = Outlet[ByteVector]("ByteVector.out")
+  val out = Outlet[MTProtoRequest]("ByteVector.out")
 
-  override val shape: FlowShape[ByteString, ByteVector] = FlowShape(in, out)
+  override val shape: FlowShape[ByteString, MTProtoRequest] = FlowShape(in, out)
   override def createLogic(inheritedAttributes: Attributes): GraphStageLogic = new GraphStageLogic(shape) with InHandler with OutHandler {
 
     var buffer = ByteVector.empty
